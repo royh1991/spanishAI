@@ -48,6 +48,23 @@ the week's total was).
   rotations, `level_anchor`/`level_example` as the level rises) AND
   `state/curriculum-state.md` together.
 
+### 4. "Author the next lesson unit"
+
+Lessons are fully scripted in `lessons/` — ChatGPT executes them, it never
+designs them. When `session.py start` warns that ≤2 scripted lessons remain
+(or the user asks):
+
+1. Read `lessons/README.md` (format), the next unit's spec in
+   `lessons/p1/unit-maps.md` (or the next phase's outline in `docs/PLAN.md`),
+   `state/error-ledger.json`, and the last few session logs.
+2. Write the unit's 6 lesson files following the existing files' anatomy
+   exactly (verbatim drill questions, task beats with a complication and a
+   concrete outcome, 6-9 Mexican vocab items the tutor uses naturally, warm-up
+   quizzing the PREVIOUS lesson's vocab). Weight drills toward ledger features
+   that are actually failing; reuse personas and their state.
+3. Append the new ids to `lessons/SEQUENCE`, update persona state if the unit
+   advances their story, commit.
+
 ## Rules
 
 - **Never fabricate transcript content.** Analyze only what's actually there;

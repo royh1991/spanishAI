@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 STATE = ROOT / "state" / "state.json"
 LEDGER = ROOT / "state" / "error-ledger.json"
 LOGS = ROOT / "state" / "session-logs"
+LESSONS = ROOT / "lessons"
 INBOX = ROOT / "state" / "vocab" / "inbox.md"
 TSV = ROOT / "state" / "vocab" / "anki-import.tsv"
 TEMPLATE = ROOT / "prompts" / "session-header-template.md"
@@ -66,11 +67,26 @@ def recent_vocab(n=8):
     return [r[0] for r in rows[-n:]]
 
 
+def next_lesson(state):
+    seq_file = LESSONS / "SEQUENCE"
+    if not seq_file.exists():
+        return None, None
+    seq = seq_file.read_text().split()
+    i = state.get("lesson_index", 0)
+    if i >= len(seq):
+        return None, None
+    return seq[i], (LESSONS / (seq[i] + ".md")).read_text()
+
+
 def cmd_start(args):
     state = load(STATE)
     ledger = load(LEDGER)
     targets = active_targets(ledger)
     vocab = recent_vocab()
+
+    lesson_id, lesson_body = next_lesson(state)
+    seq_len = len((LESSONS / "SEQUENCE").read_text().split()) if (LESSONS / "SEQUENCE").exists() else 0
+    remaining = seq_len - state.get("lesson_index", 0)
 
     task = args.task or state["task_rotation"][state["task_index"] % len(state["task_rotation"])]
     fluency = state["fluency_topics"][state["fluency_index"] % len(state["fluency_topics"])]
@@ -79,12 +95,16 @@ def cmd_start(args):
     text = TEMPLATE.read_text()
     parts = text.split("\n---\n")
     body = parts[1] if len(parts) > 1 else text
+    if lesson_body and not args.task:
+        rules = body.split("ESTRUCTURA DE LA SESIÓN")[0]
+        body = rules + "\n" + lesson_body
     fills = {
         "{LEVEL_ANCHOR}": state["level_anchor"],
         "{LEVEL_EXAMPLE}": state["level_example"],
         "{TARGET_FEATURES}": features,
         "{TARGET_FEATURES_SHORT}": features,
         "{VOCAB_QUIZ}": ", ".join(vocab) or "(aún no hay vocabulario minado — omite esta parte)",
+        "{VOCAB_RECIENTE}": ", ".join(vocab) or "(aún no hay vocabulario minado — omite esta parte)",
         "{VOCAB_SHORT}": ", ".join(vocab[:4]) or "(ninguno)",
         "{ERROR_RETRIEVAL}": features,
         "{TASK}": task,
@@ -97,11 +117,18 @@ def cmd_start(args):
         body = body.replace(k, v)
 
     hours = state["total_minutes"] / 60
+    lesson_note = f" — lección {lesson_id}" if lesson_body and not args.task else " — (generic rotation)"
     print(f"# Session {state['session_counter'] + 1} — {dt.date.today()} — "
-          f"phase {state['phase']} — {hours:.1f}/500 h — week entries: {state['week_entries']}\n")
+          f"phase {state['phase']}{lesson_note} — {hours:.1f}/500 h — week entries: {state['week_entries']}\n")
     print(body.strip())
     print("\n[after the session: run prompts/debrief.md on the transcript, then: "
           "python3 tools/session.py log <debrief.json>]")
+    if 0 < remaining <= 2:
+        print(f"[WARNING: only {remaining} scripted lesson(s) left — author the next "
+              "unit from lessons/p1/unit-maps.md (AGENTS.md workflow 4)]")
+    elif lesson_body is None and not args.task:
+        print("[WARNING: lesson sequence exhausted — running generic rotation; "
+              "author the next unit (AGENTS.md workflow 4)]")
 
 
 # ---------------------------------------------------------------- log
@@ -211,6 +238,7 @@ def cmd_log(args):
         state["sessions_completed"] += 1
         state["task_index"] += 1
         state["fluency_index"] += 1
+        state["lesson_index"] = state.get("lesson_index", 0) + 1
     update_streak(state, d)
     update_ledger(ledger, entry, n, date)
     append_vocab(entry, date)

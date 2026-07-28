@@ -31,8 +31,15 @@ python3 tools/session.py stats     # regenerate PROGRESS.md any time
 run the canary tests (`prompts/canary-tests.md`), do the baseline battery, book
 OPIc #1, set up Anki+FSRS, fill in the if-then slots in `state/adherence.md`.
 
+Sessions are **fully scripted**: `tools/session.py start` serves the next
+lesson from `lessons/` (exact warm-up quiz, roleplay beats, verbatim drill
+questions, vocabulary) — ChatGPT executes the script, it never designs the
+lesson. New units get authored in this repo from `lessons/p1/unit-maps.md`.
+
 ## Layout
 
+- `lessons/` — the scripted lessons: P0 diagnostics, P1 Unit 1 (ser/estar),
+  unit maps for the rest of P1, and the scripted 4-week studio rotation
 - `docs/PLAN.md` — the plan: honest timeline math, weekly rhythm, phases P0-P4,
   task menus, materials ladder (Mexican-first), assessment calendar, risk register
 - `docs/BRAINSTORM.md` — research synthesis and design rationale
