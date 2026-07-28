@@ -8,7 +8,7 @@ with their state. Weight the drills toward whatever the error ledger says is
 actually failing. Fluency topics repeat across a unit on purpose (de Jong &
 Perfetti: repetition is the active ingredient).
 
-## Unidad 2 — Pretérito e imperfecto (07–12)
+## Unidad 2 — Pretérito e imperfecto (07–12) — YA AUTORADA (ver p1/07–12)
 
 - **07 El fin de semana.** Pretérito regular + fui/estuve/hice/tuve. Task:
   Andrés y yo comparamos el fin de semana, él pide cronología exacta ("¿y
