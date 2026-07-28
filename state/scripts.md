@@ -7,6 +7,7 @@ behind them). Status: draft → memorized → personalized → retired.
 
 | # | Script | Status | Notes |
 |---|---|---|---|
+| 0 | **Frases de auxilio** — memorize BEFORE the next session: "Más despacio, por favor" · "¿Me lo repites?" · "¿Me repites la última parte?" · "¿Qué significa…?" · "¿Cómo se dice…?" · "No te entendí" · "¿Puedo decirlo en inglés?" | **memorize NOW** | the survival kit; replaces improvised calques like "es posible para hablar" |
 | 1 | Self-intro (quién soy, a qué me dedico, de dónde soy) | draft | build in first P1 sessions |
 | 2 | Mi historia con el español (prepa, AP, 15 años, por qué vuelvo) | draft | doubles as canary-test material |
 | 3 | Marco de opinión (creo que… porque…; por un lado… por otro…) | draft | |
