@@ -31,7 +31,11 @@ Produce:
    sentence from or near the conversation context.
 4. **Better-said.** The 3 sentences of mine that were understandable but clunky,
    each with how a native from Mexico City would actually say it.
-5. **One-line focus** for next session.
+5. **Parked items.** Anything the tutor deferred mid-session ("lo anoto para el
+   repaso", "lo vemos con la transcripción después") or answered hastily —
+   including disputes about whether something was correct. Resolve each one HERE,
+   properly, with a clear final answer. This is where arguments get settled.
+6. **One-line focus** for next session.
 
 Then output EXACTLY this JSON in a fenced block (no commentary inside it):
 
