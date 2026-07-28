@@ -1,30 +1,50 @@
 # spanishAI
 
-A self-directed, evidence-based 500+ hour Spanish program built around daily
-~1-hour conversation sessions with ChatGPT's real-time voice model (GPT-Live-1),
-with curriculum state, memory, testing, and review engineered outside ChatGPT
-(since every voice session starts fresh and there is no API access).
+A self-directed, evidence-based **500-hour** Spanish program targeting **ACTFL
+Advanced Mid speaking in Mexican Spanish**, built around 2 weekly ~1-hour
+conversation sessions with ChatGPT's GPT-Live-1 voice model plus 1 studio hour
+and a daily Anki micro-habit (~3-4 h/week ≈ 2.5-3 years).
 
-Learner profile: native English speaker, 4 years of high-school Spanish,
-AP Spanish Language score of 4, ~15 years dormant ("false intermediate" —
-gets by in Mexico, rusty at spontaneous production).
+GPT-Live-1 has no API and every voice session starts fresh, so **this repo is
+the brain**: curriculum state, error ledger, vocab pipeline, assessments, and
+progress tracking all live here. A desktop coding agent (Codex / Claude Code)
+opened in this repo runs the loop around each session — see `AGENTS.md`.
 
-## Repository layout
+## The loop
 
-- `docs/research/` — deep research underpinning the program design:
-  - `sla-evidence.md` — what the instructed-SLA academic literature actually supports (and where it's contested)
-  - `gov-intensive.md` — how FSI, DLIFLC, and the FBI train/test language; what transfers to a solo learner
-  - `mtc-missionary.md` — the LDS Missionary Training Center method; what transfers
-  - `vocab-srs.md` — vocabulary coverage research, spaced repetition science, card-design evidence
-  - `assessment.md` — ACTFL/ILR/CEFR scales, OPI protocol, elicited imitation, LLM-as-rater evidence, accent evaluation
-  - `ai-architecture.md` — GPT-Live-1 capabilities/limits, cross-session memory patterns, commercial AI-tutor designs, documented failure modes
-  - `adherence.md` — motivation, habit, and dropout research for long self-directed programs
-  - `input-literacy.md` — listening decoding, extensive reading, and written corrective feedback as core activities
-  - `defossilization.md` — whether fossilized errors can be fixed; Spanish morphosyntax acquisition sequences
-  - `critique.md` — adversarial review of the research above: gaps, dubious claims, contradictions
-- `docs/BRAINSTORM.md` — the synthesis: proposed program shape, system architecture, open decisions
+```
+python3 tools/session.py start     # 1. generate today's session header
+                                   # 2. paste into a fresh GPT-Live-1 voice chat,
+                                   #    do the 45-min session (you drive block
+                                   #    transitions: "siguiente bloque")
+                                   # 3. copy the transcript, tell your agent:
+                                   #    "log this session"  (or run
+                                   #    prompts/debrief.md in ChatGPT text mode
+                                   #    yourself and:)
+python3 tools/session.py log debrief.json --commit
+python3 tools/session.py stats     # regenerate PROGRESS.md any time
+```
 
-## Status
+## Getting started (P0 checklist)
 
-Research + brainstorm phase. The 500-hour lesson plan and any tooling/code
-come after the open decisions in `docs/BRAINSTORM.md` are settled.
+`state/curriculum-state.md` has the full checklist: create the ChatGPT Project,
+run the canary tests (`prompts/canary-tests.md`), do the baseline battery, book
+OPIc #1, set up Anki+FSRS, fill in the if-then slots in `state/adherence.md`.
+
+## Layout
+
+- `docs/PLAN.md` — the plan: honest timeline math, weekly rhythm, phases P0-P4,
+  task menus, materials ladder (Mexican-first), assessment calendar, risk register
+- `docs/BRAINSTORM.md` — research synthesis and design rationale
+- `docs/research/` — nine sourced research streams (SLA evidence, FSI/DLI, the
+  Mormon MTC, vocab/SRS, assessment, AI architecture, adherence, listening/
+  reading/writing, defossilization) + an adversarial critique
+- `prompts/` — the artifacts that run inside ChatGPT: session header template,
+  post-session debrief, simulated OPI, monologue benchmark, staged writing
+  feedback, week-1 canary tests
+- `state/` — learner profile, curriculum state, error ledger, personas, scripts,
+  adherence system, vocab pipeline, session logs, assessments
+- `tools/session.py` — header generation, debrief ingestion (hours, streak,
+  ledger, vocab, dashboard), stats
+- `PROGRESS.md` — auto-generated dashboard
+- `AGENTS.md` — operating manual for coding agents

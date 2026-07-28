@@ -1,0 +1,34 @@
+{
+  "phase": "P0",
+  "level_anchor": "B1 (intermedio)",
+  "level_example": "Ayer fui al mercado y compré fruta porque quería hacer un postre para mis amigos.",
+  "started_date": null,
+  "total_minutes": 0,
+  "minutes_by_type": {},
+  "sessions_completed": 0,
+  "session_counter": 0,
+  "weekly_target": 3,
+  "streak_weeks": 0,
+  "repair_tokens": 2,
+  "last_logged_week": null,
+  "week_entries": 0,
+  "form_focus": "ser vs estar (matar el sobreuso de ser)",
+  "task_rotation": [
+    "Diagnóstico: cuéntale al tutor tu historia con el español (prepa, AP, viajes a México) — él te interrumpe con preguntas",
+    "Narración del pasado: tu último viaje a México, con qué salió mal — el tutor pide detalles del trasfondo (imperfecto) y de los eventos (pretérito)",
+    "Roleplay con complicación: llegas a un hotel en CDMX y tu reservación no aparece — el tutor es el recepcionista poco cooperativo",
+    "Enséñale un tema: explícale al tutor algo de tu trabajo o un hobby como si fuera un principiante curioso que interrumpe con preguntas",
+    "Entrevista: el tutor es un periodista mexicano que te entrevista sobre tu vida; luego se invierten los papeles",
+    "Roleplay con complicación: devolver un producto defectuoso en una tienda; el empleado se resiste"
+  ],
+  "task_index": 0,
+  "fluency_topics": [
+    "tu rutina de una semana normal",
+    "la mejor comida que has comido en México",
+    "tu primer trabajo",
+    "una ciudad que conoces bien",
+    "un plan que salió mal",
+    "qué harías con un año sabático"
+  ],
+  "fluency_index": 0
+}
