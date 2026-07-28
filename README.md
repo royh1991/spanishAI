@@ -10,6 +10,8 @@ the brain**: curriculum state, error ledger, vocab pipeline, assessments, and
 progress tracking all live here. A desktop coding agent (Codex / Claude Code)
 opened in this repo runs the loop around each session — see `AGENTS.md`.
 
+**New here? Read `QUICKSTART.md` — one page, one session end to end.**
+
 ## The loop
 
 ```
